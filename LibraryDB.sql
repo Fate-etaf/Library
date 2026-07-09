@@ -35,7 +35,8 @@ CREATE TABLE Reader
     ReaderName NVARCHAR(100) NOT NULL,
     Phone VARCHAR(20),
     Email VARCHAR(100),
-    Password VARCHAR(20)
+    Password VARCHAR(20),
+    Role VARCHAR(20)
 );
 
 -- Borrow
@@ -77,11 +78,11 @@ VALUES
 ('Physics 101', 'John Smith', 'Pearson', 2018, 6, 4);
 
 INSERT INTO Reader
-(ReaderName, Phone, Email, Password)
+(ReaderName, Phone, Email, Password,Role)
 VALUES
-('Nguyen Van A', '0901111111', 'a@gmail.com','Pass@1234'),
-('Tran Thi B', '0902222222', 'b@gmail.com','Pass@1234'),
-('Le Van C', '0903333333', 'c@gmail.com','Pass@1234');
+('Nguyen Van A', '0901111111', 'a@gmail.com','Pass@1234','Librarian'),
+('Tran Thi B', '0902222222', 'b@gmail.com','Pass@1234','Reader'),
+('Le Van C', '0903333333', 'c@gmail.com','Pass@1234','Reader');
 
 INSERT INTO Borrow
 (ReaderId, BookId, BorrowDate, ReturnDate, Status)
