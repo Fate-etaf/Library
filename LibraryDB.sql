@@ -72,10 +72,10 @@ VALUES
 INSERT INTO Book
 (Title, Author, Publisher, YearPublish, Quantity, CategoryId)
 VALUES
-('Clean Code', 'Robert C. Martin', 'Prentice Hall', 2008, 5, 2),
-('Harry Potter', 'J.K. Rowling', 'Bloomsbury', 1997, 10, 1),
-('Learning SQL', 'Alan Beaulieu', 'OReilly', 2020, 3, 2),
-('Physics 101', 'John Smith', 'Pearson', 2018, 6, 4);
+('Clean Code', 'Robert C. Martin', 'Prentice Hall', 2008, 5, 2,'https://m.media-amazon.com/images/I/71q5PkuN7XL._SL1500_.jpg'),
+('Harry Potter', 'J.K. Rowling', 'Bloomsbury', 1997, 10, 1,'https://tse3.mm.bing.net/th/id/OIP.rzOJSuuR3Ouj7mFASdVGhQHaLH?r=0&cb=thfc1falcon4&rs=1&pid=ImgDetMain&o=7&rm=3'),
+('Learning SQL', 'Alan Beaulieu', 'OReilly', 2020, 3, 2,'https://sanet.pics/storage-6/0320/WqXGzcn3ne2kWHE6t5VlQuaz2gURkLLh.jpg'),
+('Physics 101', 'John Smith', 'Pearson', 2018, 6, 4,'https://m.media-amazon.com/images/I/61HyUGR80VL._SL1433_.jpg');
 
 INSERT INTO Reader
 (ReaderName, Phone, Email, Password,Role)
