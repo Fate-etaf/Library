@@ -20,7 +20,7 @@ namespace LibraryBorrowBook.View
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        private readonly ReaderService _readerService = new ReaderService();
+        private readonly UserService _readerService = new UserService();
 
         public RegisterWindow()
         {

@@ -9,14 +9,14 @@ namespace LibraryBorrowBook.View
     public partial class ReaderManagement : Window
     {
         private readonly User _currentReader;
-        private readonly ReaderService _readerService;
+        private readonly UserService _readerService;
         private User? _selectedReader;
 
         public ReaderManagement(User currentReader)
         {
             InitializeComponent();
             _currentReader = currentReader;
-            _readerService = new ReaderService();
+            _readerService = new UserService();
             LoadData();
         }
 

@@ -2,7 +2,7 @@ using Library.Models;
 
 namespace LibraryBorrowBook.Repositories
 {
-    public class ReaderRepository
+    public class UserRepository
     {
         public User? CheckLogin(string username, string password)
         {

@@ -3,13 +3,13 @@ using LibraryBorrowBook.Repositories;
 
 namespace LibraryBorrowBook.Services
 {
-    public class ReaderService
+    public class UserService
     {
-        private readonly ReaderRepository _repository;
+        private readonly UserRepository _repository;
 
-        public ReaderService()
+        public UserService()
         {
-            _repository = new ReaderRepository();
+            _repository = new UserRepository();
         }
 
         public User? Login(string username, string password)
