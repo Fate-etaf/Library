@@ -80,7 +80,7 @@ VALUES
 INSERT INTO Reader
 (ReaderName, Phone, Email, Password,Role)
 VALUES
-('Nguyen Van A', '0901111111', 'a@gmail.com','Pass@1234','Librarian'),
+('Nguyen Van A', '0901111111', 'a@gmail.com','Pass@1234','Admin'),
 ('Tran Thi B', '0902222222', 'b@gmail.com','Pass@1234','Reader'),
 ('Le Van C', '0903333333', 'c@gmail.com','Pass@1234','Reader');
 
