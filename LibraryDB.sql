@@ -28,11 +28,11 @@ CREATE TABLE Book
         REFERENCES Category(CategoryId)
 );
 
--- Reader
-CREATE TABLE Reader
+-- User
+CREATE TABLE User
 (
-    ReaderId INT IDENTITY(1,1) PRIMARY KEY,
-    ReaderName NVARCHAR(100) NOT NULL,
+    UserId INT IDENTITY(1,1) PRIMARY KEY,
+    UserName NVARCHAR(100) NOT NULL,
     Phone VARCHAR(20),
     Email VARCHAR(100),
     Password VARCHAR(20),
@@ -77,15 +77,15 @@ VALUES
 ('Learning SQL', 'Alan Beaulieu', 'OReilly', 2020, 3, 2,'https://sanet.pics/storage-6/0320/WqXGzcn3ne2kWHE6t5VlQuaz2gURkLLh.jpg'),
 ('Physics 101', 'John Smith', 'Pearson', 2018, 6, 4,'https://m.media-amazon.com/images/I/61HyUGR80VL._SL1433_.jpg');
 
-INSERT INTO Reader
-(ReaderName, Phone, Email, Password,Role)
+INSERT INTO User
+(UserName, Phone, Email, Password,Role)
 VALUES
 ('Nguyen Van A', '0901111111', 'a@gmail.com','Pass@1234','Admin'),
 ('Tran Thi B', '0902222222', 'b@gmail.com','Pass@1234','Reader'),
 ('Le Van C', '0903333333', 'c@gmail.com','Pass@1234','Reader');
 
 INSERT INTO Borrow
-(ReaderId, BookId, BorrowDate, ReturnDate, Status)
+(UserId, BookId, BorrowDate, ReturnDate, Status)
 VALUES
 (1, 1, '2026-07-01', '2026-07-08', 'Returned'),
 (2, 2, '2026-07-05', NULL, 'Borrowing'),
