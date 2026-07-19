@@ -16,12 +16,49 @@ namespace LibraryBorrowBook.View
         {
             InitializeComponent();
             _currentReader = currentReader;
+
+            if (_currentReader.Role != null && _currentReader.Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+            {
+                txtHeader.Text = "📋 Manage Borrows";
+                btnReturn.Visibility = Visibility.Visible;
+                adminSearchPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                txtHeader.Text = "📋 My Borrows";
+                btnReturn.Visibility = Visibility.Collapsed;
+                adminSearchPanel.Visibility = Visibility.Collapsed;
+            }
+
             LoadData();
         }
 
         private void LoadData()
         {
-            dgBorrows.ItemsSource = borrowService.GetBorrowsByUserId(_currentReader.UserId);
+            if (_currentReader.Role != null && _currentReader.Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+            {
+                var allBorrows = borrowService.GetAllBorrows();
+                string phoneKeyword = txtSearchPhone?.Text?.Trim() ?? "";
+                if (!string.IsNullOrEmpty(phoneKeyword))
+                {
+                    allBorrows = allBorrows.Where(b => 
+                        b.User != null && 
+                        b.User.Phone != null && 
+                        b.User.Phone.Contains(phoneKeyword)
+                    ).ToList();
+                }
+                dgBorrows.ItemsSource = allBorrows;
+            }
+            else
+            {
+                var borrows = borrowService.GetBorrowsByUserId(_currentReader.UserId);
+                dgBorrows.ItemsSource = borrows.Where(b => b.Status != null && b.Status.Equals("Borrowing", StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+        }
+
+        private void txtSearchPhone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LoadData();
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -40,7 +77,6 @@ namespace LibraryBorrowBook.View
 
             if (string.IsNullOrWhiteSpace(borrow.Book.Image))
             {
-                MessageBox.Show("This book has no image.");
                 imgBook.Source = null;
                 return;
             }
@@ -53,14 +89,20 @@ namespace LibraryBorrowBook.View
 
             if (borrow == null)
             {
-                MessageBox.Show("Please select a borrow record.");
+                MessageBox.Show("Please select a borrow record.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (borrow.Status != null && borrow.Status.Equals("Returned", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("This book has already been returned.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
             borrow.Status = "Returned";
             borrowService.Update(borrow);
 
-            MessageBox.Show("Return successful.");
+            MessageBox.Show("Return successful.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
             LoadData();
         }

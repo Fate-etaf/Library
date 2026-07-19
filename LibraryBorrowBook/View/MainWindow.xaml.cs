@@ -82,7 +82,7 @@ namespace LibraryBorrowBook.View
 
             Borrow borrow = new Borrow()
             {
-                UserId = _currentReader.UserId,
+                ReaderId = _currentReader.UserId,
                 BookId = selectedBook.BookId,
                 Status = "Borrowing"
             };

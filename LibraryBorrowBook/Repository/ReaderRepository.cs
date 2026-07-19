@@ -33,7 +33,7 @@ namespace LibraryBorrowBook.Repositories
             if (reader != null)
             {
                 // Delete associated borrows first to avoid foreign key constraint violations
-                var borrows = context.Borrows.Where(b => b.UserId == userId).ToList();
+                var borrows = context.Borrows.Where(b => b.ReaderId == userId).ToList();
                 if (borrows.Any())
                 {
                     context.Borrows.RemoveRange(borrows);

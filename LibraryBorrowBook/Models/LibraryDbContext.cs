@@ -67,7 +67,7 @@ public partial class LibraryDbContext : DbContext
                 .HasConstraintName("FK_Borrow_Book");
 
             entity.HasOne(d => d.User).WithMany(p => p.Borrows)
-                .HasForeignKey(d => d.UserId)
+                .HasForeignKey(d => d.ReaderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Borrow_Reader");
         });
@@ -85,7 +85,7 @@ public partial class LibraryDbContext : DbContext
         {
             entity.HasKey(e => e.UserId).HasName("PK__Reader__8E67A5E127213F67");
 
-            entity.ToTable("Reader");
+            entity.ToTable("Users");
 
             entity.Property(e => e.Email)
                 .HasMaxLength(100)

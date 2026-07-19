@@ -23,7 +23,8 @@
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
-                <TextBlock Text="📋 My Borrows"
+                <TextBlock x:Name="txtHeader"
+                           Text="📋 My Borrows"
                            FontSize="20"
                            FontWeight="Bold"
                            Foreground="White"
@@ -47,33 +48,61 @@
                 <ColumnDefinition Width="220"/>
             </Grid.ColumnDefinitions>
 
-            <!-- DataGrid -->
-            <Border Grid.Column="0"
-                    CornerRadius="8"
-                    BorderThickness="1.5"
-                    BorderBrush="{StaticResource BorderOrangeBrush}"
-                    Margin="0,0,10,0">
-                <DataGrid x:Name="dgBorrows"
-                          AutoGenerateColumns="False"
-                          IsReadOnly="True"
-                          SelectionChanged="scReturn"
-                          BorderThickness="0">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Borrow ID"
-                                            Binding="{Binding BorrowId}"
-                                            Width="80"/>
-                        <DataGridTextColumn Header="Reader"
-                                            Binding="{Binding User.UserName}"
-                                            Width="150"/>
-                        <DataGridTextColumn Header="Book"
-                                            Binding="{Binding Book.Title}"
-                                            Width="200"/>
-                        <DataGridTextColumn Header="Status"
-                                            Binding="{Binding Status}"
-                                            Width="100"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Border>
+            <!-- Left side: Search & DataGrid -->
+            <Grid Grid.Column="0" Margin="0,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Search Bar (Admin Only) -->
+                <StackPanel x:Name="adminSearchPanel" 
+                            Orientation="Horizontal" 
+                            Margin="0,0,0,10" 
+                            Visibility="Collapsed" 
+                            VerticalAlignment="Center">
+                    <TextBlock Text="🔍 Search by Phone: " 
+                               VerticalAlignment="Center" 
+                               FontWeight="SemiBold" 
+                               Foreground="#CC5500" 
+                               Margin="0,0,6,0"/>
+                    <TextBox x:Name="txtSearchPhone" 
+                             Width="200" 
+                             Height="28" 
+                             VerticalContentAlignment="Center"
+                             TextChanged="txtSearchPhone_TextChanged"
+                             BorderBrush="#FFCC80"
+                             BorderThickness="1.5"
+                             Padding="4,0,4,0"/>
+                </StackPanel>
+
+                <!-- DataGrid -->
+                <Border Grid.Row="1"
+                        CornerRadius="8"
+                        BorderThickness="1.5"
+                        BorderBrush="{StaticResource BorderOrangeBrush}">
+                    <DataGrid x:Name="dgBorrows"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              SelectionChanged="scReturn"
+                              BorderThickness="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Borrow ID"
+                                                Binding="{Binding BorrowId}"
+                                                Width="80"/>
+                            <DataGridTextColumn Header="Reader"
+                                                Binding="{Binding User.UserName}"
+                                                Width="150"/>
+                            <DataGridTextColumn Header="Book"
+                                                Binding="{Binding Book.Title}"
+                                                Width="200"/>
+                            <DataGridTextColumn Header="Status"
+                                                Binding="{Binding Status}"
+                                                Width="100"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </Grid>
 
             <!-- Side panel -->
             <Border Grid.Column="1"

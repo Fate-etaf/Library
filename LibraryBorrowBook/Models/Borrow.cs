@@ -7,7 +7,7 @@ public partial class Borrow
 {
     public int BorrowId { get; set; }
 
-    public int UserId { get; set; }
+    public int ReaderId { get; set; }
 
     public int BookId { get; set; }
 

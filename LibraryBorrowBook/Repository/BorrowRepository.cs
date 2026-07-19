@@ -22,7 +22,7 @@ namespace LibraryBorrowBook.Repositories
             return context.Borrows
                 .Include(b => b.Book)
                 .Include(b => b.User)
-                .Where(b => b.UserId == userId)
+                .Where(b => b.ReaderId == userId)
                 .ToList();
         }
 
