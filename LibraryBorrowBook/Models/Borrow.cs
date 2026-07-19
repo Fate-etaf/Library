@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Library.Models;
@@ -7,7 +7,7 @@ public partial class Borrow
 {
     public int BorrowId { get; set; }
 
-    public int ReaderId { get; set; }
+    public int UserId { get; set; }
 
     public int BookId { get; set; }
 
@@ -19,5 +19,5 @@ public partial class Borrow
 
     public virtual Book Book { get; set; } = null!;
 
-    public virtual Reader Reader { get; set; } = null!;
+    public virtual User User { get; set; } = null!;
 }

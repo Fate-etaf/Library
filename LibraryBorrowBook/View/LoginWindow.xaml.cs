@@ -1,5 +1,5 @@
-﻿using Library.Models;
-using LibraryBorrowBook.DAO;
+using Library.Models;
+using LibraryBorrowBook.Services;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -32,11 +32,12 @@ namespace LibraryBorrowBook.View
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            Reader? account = LoginDAO.CheckLogin(username, password);
+            var readerService = new ReaderService(); 
+            User? account = readerService.Login(username, password);
 
             if (account != null)
             {
-                MainWindow mainWindow = new MainWindow();
+                var mainWindow = new MainWindow(account);
                 mainWindow.Show();
                 this.Close();
             }

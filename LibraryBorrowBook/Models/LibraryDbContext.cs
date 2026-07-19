@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ public partial class LibraryDbContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
-    public virtual DbSet<Reader> Readers { get; set; }
+    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -66,8 +66,8 @@ public partial class LibraryDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Borrow_Book");
 
-            entity.HasOne(d => d.Reader).WithMany(p => p.Borrows)
-                .HasForeignKey(d => d.ReaderId)
+            entity.HasOne(d => d.User).WithMany(p => p.Borrows)
+                .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Borrow_Reader");
         });
@@ -81,9 +81,9 @@ public partial class LibraryDbContext : DbContext
             entity.Property(e => e.CategoryName).HasMaxLength(100);
         });
 
-        modelBuilder.Entity<Reader>(entity =>
+        modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.ReaderId).HasName("PK__Reader__8E67A5E127213F67");
+            entity.HasKey(e => e.UserId).HasName("PK__Reader__8E67A5E127213F67");
 
             entity.ToTable("Reader");
 
@@ -93,7 +93,7 @@ public partial class LibraryDbContext : DbContext
             entity.Property(e => e.Phone)
                 .HasMaxLength(20)
                 .IsUnicode(false);
-            entity.Property(e => e.ReaderName).HasMaxLength(100);
+            entity.Property(e => e.UserName).HasMaxLength(100);
         });
 
         OnModelCreatingPartial(modelBuilder);

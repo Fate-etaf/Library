@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using LibraryBorrowBook.Services;
 
 namespace LibraryBorrowBook.View
 {
@@ -19,6 +20,8 @@ namespace LibraryBorrowBook.View
     /// </summary>
     public partial class RegisterWindow : Window
     {
+        private readonly ReaderService _readerService = new ReaderService();
+
         public RegisterWindow()
         {
             InitializeComponent();
@@ -26,9 +29,24 @@ namespace LibraryBorrowBook.View
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
+            string username = UsernameTextBox.Text.Trim();
+            string password = PasswordTextBox.Text.Trim();
+
+            try
+            {
+                _readerService.Register(username, password);
+                MessageBox.Show("Account created successfully! Please log in.", "Registration Successful",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.Show();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Registration Failed",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

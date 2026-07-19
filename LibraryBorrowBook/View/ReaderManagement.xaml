@@ -1,0 +1,122 @@
+<Window x:Class="LibraryBorrowBook.View.ReaderManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Library — Reader Management" Height="500" Width="850"
+        Background="{StaticResource WarmWhiteBrush}"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="56"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FF8C00" Offset="0"/>
+                    <GradientStop Color="#FFD700" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <TextBlock Text="👥 Reader Management"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="16,0,0,0"/>
+                
+                <Button x:Name="btnBack"
+                        Content="← Back"
+                        Width="90"
+                        Height="32"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="0,0,12,0"
+                        Click="btnBack_Click"/>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="1" Margin="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="280"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- DataGrid -->
+            <DataGrid x:Name="dgReaders"
+                      Grid.Column="0"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      HeadersVisibility="Column"
+                      Background="White"
+                      BorderBrush="#FFCC80"
+                      BorderThickness="1"
+                      Margin="0,0,16,0"
+                      SelectionChanged="dgReaders_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding UserName}" Width="*"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150"/>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="100"/>
+                    <DataGridTextColumn Header="Role" Binding="{Binding Role}" Width="80"/>
+                    <DataGridTextColumn Header="Password" Binding="{Binding Password}" Width="120"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Action Panel -->
+            <Border Grid.Column="1"
+                    Background="White"
+                    BorderBrush="#FFCC80"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="16">
+                <StackPanel>
+                    <TextBlock Text="Update Password" 
+                               FontSize="16" 
+                               FontWeight="Bold" 
+                               Foreground="#FF8C00"
+                               Margin="0,0,0,12"/>
+                    
+                    <TextBlock x:Name="txtSelectedReader" 
+                               Text="Selected Reader: None" 
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,8"
+                               Foreground="#5C3A00"/>
+                    
+                    <TextBlock Text="New Password:" Margin="0,0,0,4"/>
+                    <TextBox x:Name="txtNewPassword" Height="30" Margin="0,0,0,12"/>
+                    
+                    <Button x:Name="btnUpdatePassword"
+                            Content="Save Password"
+                            Height="32"
+                            Margin="0,0,0,24"
+                            Click="btnUpdatePassword_Click"/>
+                    
+                    <Separator Margin="0,0,0,24"/>
+                    
+                    <TextBlock Text="Delete User" 
+                               FontSize="16" 
+                               FontWeight="Bold" 
+                               Foreground="#FF8C00"
+                               Margin="0,0,0,12"/>
+                               
+                    <TextBlock Text="Warning: This action cannot be undone."
+                               Foreground="Red"
+                               TextWrapping="Wrap"
+                               Margin="0,0,0,8"/>
+                               
+                    <Button x:Name="btnDeleteReader"
+                            Content="Delete Reader"
+                            Height="32"
+                            Background="#FF5252"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Click="btnDeleteReader_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
