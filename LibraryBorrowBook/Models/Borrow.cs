@@ -20,4 +20,6 @@ public partial class Borrow
     public virtual Book Book { get; set; } = null!;
 
     public virtual User User { get; set; } = null!;
+
+    public virtual ICollection<Fine> Fines { get; set; } = new List<Fine>();
 }

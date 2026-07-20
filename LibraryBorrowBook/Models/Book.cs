@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Library.Models;
@@ -24,4 +24,6 @@ public partial class Book
     public virtual ICollection<Borrow> Borrows { get; set; } = new List<Borrow>();
 
     public virtual Category? Category { get; set; }
+
+    public virtual ICollection<BookReview> BookReviews { get; set; } = new List<BookReview>();
 }

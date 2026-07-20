@@ -20,7 +20,12 @@ namespace LibraryBorrowBook.Services
             if (string.IsNullOrWhiteSpace(password))
                 throw new Exception("Password is required.");
 
-            return _repository.CheckLogin(username, password);
+            var user = _repository.GetUserByUsername(username);
+            if (user != null && user.Password == password)
+            {
+                return user;
+            }
+            return null;
         }
 
         public List<User> GetAllReaders()

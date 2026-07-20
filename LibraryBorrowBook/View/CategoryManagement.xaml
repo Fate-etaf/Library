@@ -1,0 +1,50 @@
+<Window x:Class="LibraryBorrowBook.View.CategoryManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Category Management" Height="450" Width="600"
+        Background="#FFFDF5E6">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="🏷 Category Management" FontSize="22" FontWeight="Bold" Foreground="#FF8C00" Margin="0,0,0,15"/>
+
+        <Grid Grid.Row="1" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Category Name:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBox Name="txtCategoryName" Grid.Column="1" VerticalContentAlignment="Center" Margin="0,0,10,-11"/>
+            <Button Name="btnSave" Grid.Column="2" Content="Save" Width="80" Height="25" Click="btnSave_Click"/>
+        </Grid>
+
+        <DataGrid Name="dgCategories" Grid.Row="2" AutoGenerateColumns="False" 
+                  CanUserAddRows="False" IsReadOnly="True"
+                  SelectionChanged="dgCategories_SelectionChanged"
+                  BorderBrush="#FFCC80" BorderThickness="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding CategoryId}" Width="50"/>
+                <DataGridTextColumn Header="Category Name" Binding="{Binding CategoryName}" Width="*"/>
+                <DataGridTemplateColumn Header="Action" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete" Click="btnDelete_Click" Foreground="White" Background="#FF4C4C" BorderThickness="0" Padding="5,2"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Name="btnBack" Grid.Row="3" Content="Back to Dashboard" Width="150" Height="30" HorizontalAlignment="Left" Margin="0,15,0,0" Click="btnBack_Click"/>
+    </Grid>
+</Window>

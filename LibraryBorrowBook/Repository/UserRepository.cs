@@ -4,13 +4,12 @@ namespace LibraryBorrowBook.Repositories
 {
     public class UserRepository
     {
-        public User? CheckLogin(string username, string password)
+        public User? GetUserByUsername(string username)
         {
             using LibraryDbContext context = new LibraryDbContext();
 
             return context.Users.FirstOrDefault(r =>
-                r.UserName == username &&
-                r.Password == password);
+                r.UserName == username);
         }
 
         public List<User> GetAllReaders()

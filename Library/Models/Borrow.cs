@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Library.Models;
@@ -19,5 +19,5 @@ public partial class Borrow
 
     public virtual Book Book { get; set; } = null!;
 
-    public virtual Reader Reader { get; set; } = null!;
+    public virtual User User { get; set; } = null!;
 }

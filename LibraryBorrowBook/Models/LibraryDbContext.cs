@@ -25,6 +25,12 @@ public partial class LibraryDbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<SystemConfig> SystemConfigs { get; set; }
+
+    public virtual DbSet<Fine> Fines { get; set; }
+
+    public virtual DbSet<BookReview> BookReviews { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var builder = new ConfigurationBuilder();
@@ -94,6 +100,59 @@ public partial class LibraryDbContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false);
             entity.Property(e => e.UserName).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<SystemConfig>(entity =>
+        {
+            entity.HasKey(e => e.ConfigId).HasName("PK__SystemCo__C3BC335CE22C81B8");
+
+            entity.ToTable("SystemConfigs");
+
+            entity.HasIndex(e => e.ConfigKey, "UQ__SystemCo__98616186AB09CBF8").IsUnique();
+
+            entity.Property(e => e.ConfigKey)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.ConfigValue).HasMaxLength(500);
+            entity.Property(e => e.Description).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<Fine>(entity =>
+        {
+            entity.HasKey(e => e.FineId).HasName("PK__Fines__9D4A92BC9A74EED9");
+
+            entity.ToTable("Fines");
+
+            entity.Property(e => e.Amount).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.Reason).HasMaxLength(255);
+            entity.Property(e => e.Status).HasMaxLength(50);
+
+            entity.HasOne(d => d.Borrow).WithMany(p => p.Fines)
+                .HasForeignKey(d => d.BorrowId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Fines_Borrow");
+        });
+
+        modelBuilder.Entity<BookReview>(entity =>
+        {
+            entity.HasKey(e => e.ReviewId).HasName("PK__BookRevi__74BC79CE7E06AB9F");
+
+            entity.ToTable("BookReviews");
+
+            entity.Property(e => e.Comment).HasMaxLength(1000);
+            entity.Property(e => e.ReviewDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+
+            entity.HasOne(d => d.Book).WithMany(p => p.BookReviews)
+                .HasForeignKey(d => d.BookId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_BookReviews_Book");
+
+            entity.HasOne(d => d.User).WithMany(p => p.BookReviews)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_BookReviews_Users");
         });
 
         OnModelCreatingPartial(modelBuilder);

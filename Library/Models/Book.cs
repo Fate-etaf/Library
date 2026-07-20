@@ -19,6 +19,8 @@ public partial class Book
 
     public int? CategoryId { get; set; }
 
+    public string? Image { get; set; }
+
     public virtual ICollection<Borrow> Borrows { get; set; } = new List<Borrow>();
 
     public virtual Category? Category { get; set; }

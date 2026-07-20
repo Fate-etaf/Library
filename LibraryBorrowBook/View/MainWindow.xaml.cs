@@ -34,6 +34,14 @@ namespace LibraryBorrowBook.View
             {
                 btnAddBook.Visibility = Visibility.Visible;
                 btnReaders.Visibility = Visibility.Visible;
+                btnCategories.Visibility = Visibility.Visible;
+                btnSettings.Visibility = Visibility.Visible;
+                DashboardPanel.Visibility = Visibility.Visible;
+
+                // Load Dashboard Statistics
+                txtTotalBooks.Text = bookService.GetAllBooks().Count.ToString();
+                txtActiveBorrows.Text = borrowService.GetAllBorrows().Count(b => b.Status != null && b.Status.Equals("Borrowing", StringComparison.OrdinalIgnoreCase)).ToString();
+                txtTotalReaders.Text = (new ReaderService()).GetAllReaders().Count.ToString();
 
                 var visibleStyle = new Style(typeof(Button), (Style)FindResource(typeof(Button)));
                 visibleStyle.Setters.Add(new Setter(VisibilityProperty, Visibility.Visible));
@@ -83,15 +91,22 @@ namespace LibraryBorrowBook.View
             Borrow borrow = new Borrow()
             {
                 ReaderId = _currentReader.UserId,
-                BookId = selectedBook.BookId,
-                Status = "Borrowing"
+                BookId = selectedBook.BookId
             };
 
-            borrowService.Add(borrow);
-            MyBorrow myBorrow = new MyBorrow(_currentReader);
-
-            myBorrow.Show();
-            this.Close();
+            try
+            {
+                borrowService.Add(borrow);
+                MessageBox.Show("Book borrowed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                
+                MyBorrow myBorrow = new MyBorrow(_currentReader);
+                myBorrow.Show();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
@@ -142,6 +157,34 @@ namespace LibraryBorrowBook.View
             ReaderManagement readerManagement = new ReaderManagement(_currentReader);
             readerManagement.Show();
             this.Close();
+        }
+
+        private void btnCategories_Click(object sender, RoutedEventArgs e)
+        {
+            CategoryManagement categoryManagement = new CategoryManagement(_currentReader);
+            categoryManagement.Show();
+            this.Close();
+        }
+
+        private void btnFines_Click(object sender, RoutedEventArgs e)
+        {
+            FinesManagement finesManagement = new FinesManagement(_currentReader);
+            finesManagement.Show();
+            this.Close();
+        }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            SystemSettings settings = new SystemSettings(_currentReader);
+            settings.Show();
+            this.Close();
+        }
+
+        private void btnInfo_Click(object sender, RoutedEventArgs e)
+        {
+            Book selectedBook = (Book)((Button)sender).DataContext;
+            BookDetails bookDetails = new BookDetails(_currentReader, selectedBook);
+            bookDetails.ShowDialog();
         }
     }
 }
