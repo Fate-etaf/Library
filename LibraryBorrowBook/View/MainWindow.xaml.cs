@@ -41,7 +41,7 @@ namespace LibraryBorrowBook.View
                 // Load Dashboard Statistics
                 txtTotalBooks.Text = bookService.GetAllBooks().Count.ToString();
                 txtActiveBorrows.Text = borrowService.GetAllBorrows().Count(b => b.Status != null && b.Status.Equals("Borrowing", StringComparison.OrdinalIgnoreCase)).ToString();
-                txtTotalReaders.Text = (new ReaderService()).GetAllReaders().Count.ToString();
+                txtTotalReaders.Text = (new UserService()).GetAllReaders().Count.ToString();
 
                 var visibleStyle = new Style(typeof(Button), (Style)FindResource(typeof(Button)));
                 visibleStyle.Setters.Add(new Setter(VisibilityProperty, Visibility.Visible));

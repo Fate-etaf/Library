@@ -28,23 +28,23 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <TextBlock Text="Select Borrow Record:" VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <ComboBox Name="cbBorrows" Grid.Column="1" Height="25" Margin="0,0,10,0" DisplayMemberPath="DisplayInfo" SelectedValuePath="BorrowId"/>
-                    
+
                     <TextBlock Text="Amount:" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBox Name="txtAmount" Grid.Column="3" Height="25" Margin="0,0,10,0" VerticalContentAlignment="Center"/>
-                    
+                    <TextBox Name="txtAmount" Grid.Column="3" Height="40" Margin="0,0,10,0" VerticalContentAlignment="Center"/>
+
                     <StackPanel Grid.Column="4" Orientation="Horizontal">
-                        <TextBlock Text="Reason:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                        <TextBox Name="txtReason" Width="150" Height="25" Margin="0,0,10,0" VerticalContentAlignment="Center"/>
+                        <TextBlock Text="Reason:" VerticalAlignment="Center" Height="40" Margin="0,0,10,0"/>
+                        <TextBox Name="txtReason" Width="150" Height="40" Margin="0,0,10,0" VerticalContentAlignment="Center"/>
                         <Button Name="btnAddFine" Content="Create Fine" Width="80" Height="25" Background="#FFD32F2F" Foreground="White" BorderThickness="0" Click="btnAddFine_Click"/>
                     </StackPanel>
                 </Grid>
             </StackPanel>
         </Border>
 
-        <DataGrid Name="dgFines" Grid.Row="2" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" BorderBrush="#FFEF9A9A" BorderThickness="1">
+        <DataGrid Name="dgFines" Grid.Row="2" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" BorderBrush="#FFEF9A9A" BorderThickness="1" Height="200" VerticalAlignment="Center">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding FineId}" Width="50"/>
                 <DataGridTextColumn Header="Reader" Binding="{Binding Borrow.User.UserName}" Width="100"/>
