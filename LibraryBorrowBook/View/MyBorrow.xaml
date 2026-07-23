@@ -61,7 +61,7 @@
                             Margin="0,0,0,10" 
                             Visibility="Collapsed" 
                             VerticalAlignment="Center">
-                    <TextBlock Text="🔍 Search by Phone: " 
+                    <TextBlock Text="🔍 Search (Phone/ID/Name): " 
                                VerticalAlignment="Center" 
                                FontWeight="SemiBold" 
                                Foreground="#CC5500" 
@@ -74,6 +74,12 @@
                              BorderBrush="#FFCC80"
                              BorderThickness="1.5"
                              Padding="4,0,4,0"/>
+                    <Button x:Name="btnExportExcel" 
+                            Content="📥 Export Excel" 
+                            Width="110" Height="28" 
+                            Margin="10,0,0,0" 
+                            Click="btnExportExcel_Click"
+                            Background="#FF107C41" Foreground="White"/>
                 </StackPanel>
 
                 <!-- DataGrid -->
@@ -89,16 +95,28 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Borrow ID"
                                                 Binding="{Binding BorrowId}"
-                                                Width="80"/>
-                            <DataGridTextColumn Header="Reader"
+                                                Width="75"/>
+                            <DataGridTextColumn Header="Reader ID"
+                                                Binding="{Binding User.UserId}"
+                                                Width="75"/>
+                            <DataGridTextColumn Header="Reader Name"
                                                 Binding="{Binding User.UserName}"
-                                                Width="150"/>
+                                                Width="130"/>
+                            <DataGridTextColumn Header="Phone"
+                                                Binding="{Binding User.Phone}"
+                                                Width="100"/>
                             <DataGridTextColumn Header="Book"
                                                 Binding="{Binding Book.Title}"
-                                                Width="200"/>
+                                                Width="150"/>
+                            <DataGridTextColumn Header="Borrow Date"
+                                                Binding="{Binding BorrowDate, StringFormat=dd/MM/yyyy}"
+                                                Width="90"/>
+                            <DataGridTextColumn Header="Return Date"
+                                                Binding="{Binding ReturnDate, StringFormat=dd/MM/yyyy}"
+                                                Width="90"/>
                             <DataGridTextColumn Header="Status"
                                                 Binding="{Binding Status}"
-                                                Width="100"/>
+                                                Width="80"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>
