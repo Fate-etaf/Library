@@ -38,8 +38,7 @@ namespace LibraryBorrowBook.View
             if (account != null)
             {
                 var mainWindow = new MainWindow(account);
-                mainWindow.Show();
-                this.Close();
+                this.SwitchTo(mainWindow);
             }
             else
             {
@@ -50,10 +49,10 @@ namespace LibraryBorrowBook.View
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             RegisterWindow register = new RegisterWindow();
-            register.Show();
-            this.Close();
+            this.SwitchTo(register);
         }
 
         
     }
 }
+

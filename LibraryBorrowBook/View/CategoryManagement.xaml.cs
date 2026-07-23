@@ -88,8 +88,8 @@ namespace LibraryBorrowBook.View
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow(_currentReader);
-            mainWindow.Show();
-            this.Close();
+            this.SwitchTo(mainWindow);
         }
     }
 }
+

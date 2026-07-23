@@ -85,8 +85,7 @@ namespace LibraryBorrowBook.View
 
                 // Go back to main window
                 MainWindow mainWindow = new MainWindow(_currentReader);
-                mainWindow.Show();
-                this.Close();
+                this.SwitchTo(mainWindow);
             }
             catch (Exception ex)
             {
@@ -98,8 +97,7 @@ namespace LibraryBorrowBook.View
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow(_currentReader);
-            mainWindow.Show();
-            this.Close();
+            this.SwitchTo(mainWindow);
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
@@ -139,3 +137,4 @@ namespace LibraryBorrowBook.View
         }
     }
 }
+

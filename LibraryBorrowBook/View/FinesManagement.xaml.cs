@@ -89,8 +89,7 @@ namespace LibraryBorrowBook.View
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             MainWindow main = new MainWindow(_currentUser);
-            main.Show();
-            this.Close();
+            this.SwitchTo(main);
         }
 
         private void btnAddFine_Click(object sender, RoutedEventArgs e)
@@ -152,3 +151,4 @@ namespace LibraryBorrowBook.View
         }
     }
 }
+

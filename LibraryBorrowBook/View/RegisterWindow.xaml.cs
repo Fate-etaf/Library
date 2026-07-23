@@ -39,8 +39,7 @@ namespace LibraryBorrowBook.View
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
                 LoginWindow loginWindow = new LoginWindow();
-                loginWindow.Show();
-                this.Close();
+                this.SwitchTo(loginWindow);
             }
             catch (Exception ex)
             {
@@ -52,8 +51,8 @@ namespace LibraryBorrowBook.View
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             LoginWindow login = new LoginWindow();
-            login.Show();
-            this.Close();
+            this.SwitchTo(login);
         }
     }
 }
+

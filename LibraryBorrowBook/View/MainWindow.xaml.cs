@@ -73,15 +73,13 @@ namespace LibraryBorrowBook.View
         private void btnMyBorrow_Click(object sender, RoutedEventArgs e)
         {
             MyBorrow myBorrow = new MyBorrow(_currentReader);
-            myBorrow.Show();
-            this.Close();
+            this.SwitchTo(myBorrow);
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             LoginWindow loginWindow = new LoginWindow();
-            loginWindow.Show();
-            this.Close();
+            this.SwitchTo(loginWindow);
         }
 
         private void btnBorrow_Click(object sender, RoutedEventArgs e)
@@ -100,8 +98,7 @@ namespace LibraryBorrowBook.View
                 MessageBox.Show("Book borrowed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 
                 MyBorrow myBorrow = new MyBorrow(_currentReader);
-                myBorrow.Show();
-                this.Close();
+                this.SwitchTo(myBorrow);
             }
             catch (Exception ex)
             {
@@ -114,15 +111,13 @@ namespace LibraryBorrowBook.View
             Book selectedBook = (Book)((Button)sender).DataContext;
 
             UpdateBook updateBook = new UpdateBook(selectedBook, _currentReader);
-            updateBook.Show();
-            this.Close();
+            this.SwitchTo(updateBook);
         }
 
         private void btnAddBook_Click(object sender, RoutedEventArgs e)
         {
             AddBook addBook = new AddBook(_currentReader);
-            addBook.Show();
-            this.Close();
+            this.SwitchTo(addBook);
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -155,29 +150,25 @@ namespace LibraryBorrowBook.View
         private void btnReaders_Click(object sender, RoutedEventArgs e)
         {
             ReaderManagement readerManagement = new ReaderManagement(_currentReader);
-            readerManagement.Show();
-            this.Close();
+            this.SwitchTo(readerManagement);
         }
 
         private void btnCategories_Click(object sender, RoutedEventArgs e)
         {
             CategoryManagement categoryManagement = new CategoryManagement(_currentReader);
-            categoryManagement.Show();
-            this.Close();
+            this.SwitchTo(categoryManagement);
         }
 
         private void btnFines_Click(object sender, RoutedEventArgs e)
         {
             FinesManagement finesManagement = new FinesManagement(_currentReader);
-            finesManagement.Show();
-            this.Close();
+            this.SwitchTo(finesManagement);
         }
 
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
             SystemSettings settings = new SystemSettings(_currentReader);
-            settings.Show();
-            this.Close();
+            this.SwitchTo(settings);
         }
 
         private void btnInfo_Click(object sender, RoutedEventArgs e)
